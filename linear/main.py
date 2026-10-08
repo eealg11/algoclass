@@ -12,14 +12,14 @@ def linear_search():
     선형 검색(Linear Search)을 수행하고 각 단계별 과정을 기록하여 반환하는 API입니다.
     
     [Request JSON Body]
-    - array: 검색 대상 리스트 (예: [10, 25, 30, 45, 50])
-    - target: 찾고자 하는 값 (예: 30)
+    - array: 검색 대상 리스트 (예: [12, 45, 7, 23, 56, 89, 34])
+    - target: 찾고자 하는 값 (예: 56)
     
     [Response JSON]
     - target: 찾고자 하는 값
     - steps: 검색 과정의 각 단계를 담은 리스트
     - found: 검색 성공 여부 (True / False)
-    - found_index: 찾은 위치 (못 찾을 경우 -1)
+    - found_index: 찾은 위치 인덱스 (못 찾을 경우 -1)
     - total_steps: 총 비교 횟수
     - time_complexity: 시간 복잡도 정보
     - space_complexity: 공간 복잡도 정보
@@ -68,16 +68,16 @@ def linear_search():
         'found_index': found_index,
         'total_steps': len(steps),
         'time_complexity': {
-            'best': 'O(1) - 첫 번째 요소에서 찾은 경우',
+            'best': 'O(1) - 첫 번째 요소가 타겟인 경우',
             'average': 'O(N) - 평균적으로 N/2번 비교',
             'worst': 'O(N) - 마지막에 있거나 요소가 없는 경우'
         },
-        'space_complexity': 'O(1) - 추가적인 메모리 공간을 거의 사용하지 않음'
+        'space_complexity': 'O(1) - 추가적인 메모리 공간을 거진 사용하지 않음'
     }
 
     return jsonify(response), 200
 
-# Cloud Run에서 지정하는 PORT 환경변수를 사용
+# Cloud Run에서 주입하는 PORT 환경변수 사용 (기본값 8080)
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
     app.run(host='0.0.0.0', port=port)
